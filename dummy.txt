@@ -1,0 +1,328 @@
+GCD
+
+n1 = int(input("Enter the first number: "))
+n2 = int(input("ENter the second number: "))
+
+while(n2 != 0):
+    (n1, n2) = (n2, n1 % n2)
+
+print("The GCD of two numbers is: ", n1)
+
+------------------------------------------------------
+
+Square root
+
+n1 = int(input("Enter the number: "))
+
+approx = n1/2
+
+for i in range(10):
+    result = 0.5 * (approx + (n1/approx))
+    approx = result
+
+print("The Square root of the given number is: ", approx)
+
+----------------------------------------------------------
+Exponential
+
+def power(x,n):
+
+    p = 1
+
+    if(n>0):
+        for i in range(1, n+1):
+            p = p * x
+
+    else:
+        for i in range(1, abs(n) + 1):
+            p = p * x
+            p= float(1/p)
+
+    return p
+
+
+x = int(input("Enter the base: "))
+n = int(input("Enter the exponent: "))
+
+print(power(x,n))
+
+
+------------------------------------------------------------
+max 3
+
+def max3(arr,n):
+
+    max1 = 0
+    max2 = 0
+    max3 = 0
+    arr.sort()
+
+    max1 = arr[n - 1]
+    max2 = arr[n - 2]
+    max3 = arr[n - 3]
+
+    MAX = []
+    MAX.append(max1)
+    MAX.append(max2)
+    MAX.append(max3)
+
+    return MAX
+
+n = int(input("Enter the no of array elements: "))
+
+array = []
+
+for i in range(n):
+    item = int(input("enter number: "))
+    array.append(item)
+
+print(max3(array,n))
+----------------------------------------------
+
+search 1
+
+
+
+n = int(input("Enter the number of list elements"))
+
+array = []
+
+for i in range(n):
+    ele = int(input("Enter the element"))
+    array.append(ele)
+
+
+find = int(input("Enter the number to be searched"))
+
+idx = -1
+
+for i in range(n):
+    if(array[i] == find):
+        idx = i
+
+if(idx == -1):
+    print("Not found")
+else:
+    print("Found at position:",idx)
+------------------------------------------------
+search 2
+# Binary Search in python
+
+
+def binarySearch(array, x, low, high):
+
+    # Repeat until the pointers low and high meet each other
+    while low <= high:
+
+        mid = low + (high - low)//2
+
+        if array[mid] == x:
+            return mid
+
+        elif array[mid] < x:
+            low = mid + 1
+
+        else:
+            high = mid - 1
+
+    return -1
+
+
+array = [3, 4, 5, 6, 7, 8, 9]
+x = 4
+
+result = binarySearch(array, x, 0, len(array)-1)
+
+if result != -1:
+    print("Element is present at index " + str(result))
+else:
+    print("Not found")
+
+--------------------------------------
+sort 1
+
+array = [213,342,22,45,546]
+
+n = len(array)
+
+for i in range(n - 1):
+    for j in range(i + 1, n):
+        if(array[i]>array[j]):
+            temp = array[i]
+            array[i] = array[j]
+            array[j] = temp
+
+print(array)
+
+
+------------------------------------------
+
+sort s
+
+# Selection sort in Python
+
+
+def selectionSort(array, size):
+   
+    for step in range(size):
+        min_idx = step
+
+        for i in range(step + 1, size):
+         
+            # to sort in descending order, change > to < in this line
+            # select the minimum element in each loop
+            if array[i] < array[min_idx]:
+                min_idx = i
+         
+        # put min at the correct position
+        (array[step], array[min_idx]) = (array[min_idx], array[step])
+
+
+data = [-2, 45, 0, 11, -9]
+size = len(data)
+selectionSort(data, size)
+print('Sorted Array in Ascending Order:')
+print(data)
+
+---------------------------------------------------------
+
+sort I
+
+# Insertion sort in Python
+
+
+def insertionSort(array):
+
+    for step in range(1, len(array)):
+        key = array[step]
+        j = step - 1
+        
+        # Compare key with each element on the left of it until an element smaller than it is found
+        # For descending order, change key<array[j] to key>array[j].        
+        while j >= 0 and key < array[j]:
+            array[j + 1] = array[j]
+            j = j - 1
+        
+        # Place key at after the element just smaller than it.
+        array[j + 1] = key
+
+
+data = [9, 5, 1, 4, 3]
+insertionSort(data)
+print('Sorted Array in Ascending Order:')
+print(data)
+
+----------------------------------------------------------------------
+
+M Sort
+
+def merge_sort(list1, left_index, right_index):    
+    if left_index >= right_index:    
+        return    
+    middle = (left_index + right_index) // 2     
+    merge_sort(list1, left_index, middle)        
+    merge_sort(list1, middle + 1, right_index)    
+    merge(list1, left_index, right_index, middle)    
+
+def merge(list1, left_index, right_index, middle):    
+    left_sublist = list1[left_index:middle + 1]    
+    right_sublist = list1[middle + 1:right_index + 1]   
+    left_sublist_index = 0    
+    right_sublist_index = 0    
+    sorted_index = left_index   
+
+    while left_sublist_index < len(left_sublist) and right_sublist_index < len(right_sublist):        
+        if left_sublist[left_sublist_index] <= right_sublist[right_sublist_index]:   
+            list1[sorted_index] = left_sublist[left_sublist_index]    
+            left_sublist_index = left_sublist_index + 1    
+        else:    
+            list1[sorted_index] = right_sublist[right_sublist_index]    
+            right_sublist_index = right_sublist_index + 1    
+        sorted_index = sorted_index + 1    
+
+    while left_sublist_index < len(left_sublist):  
+        list1[sorted_index] = left_sublist[left_sublist_index]    
+        left_sublist_index = left_sublist_index + 1    
+        sorted_index = sorted_index + 1    
+
+    while right_sublist_index < len(right_sublist):  
+        list1[sorted_index] = right_sublist[right_sublist_index]    
+        right_sublist_index = right_sublist_index + 1    
+        sorted_index = sorted_index + 1    
+
+list1 = [44, 65, 2, 3, 58, 14, 57, 23, 10, 1, 7, 74, 48]   
+print("The given list before performing the merge sort is:", list1)   
+merge_sort(list1, 0, len(list1) - 1)    
+print("The given list after performing the merge sort is:", list1) 
+
+-----------------------------------------------------------------
+
+matrix
+
+
+
+r = int(input("Enter the no of rows"))
+c = int(input("Enter the no of cols"))
+
+
+matrix1 =[]
+
+for i in range(r):
+    row = []
+
+    for j in range(c):
+        ele = int(input("Enter the element"))
+        row.append(ele)
+
+    matrix1.append(row)
+
+print("matrix 2")
+
+
+
+matrix2 =[]
+
+for i in range(r):
+    row = []
+
+    for j in range(c):
+        ele = int(input("Enter the element"))
+        row.append(ele)
+
+    matrix2.append(row)
+
+matrix3= []
+
+for i in range(r):
+    row = []
+
+    for j in range(c):
+        ele = matrix1[i][j] + matrix2[i][j]
+        row.append(ele)
+
+    matrix3.append(row)
+
+
+
+
+print(matrix1)
+print(matrix2)
+print(matrix3)
+
+matrix4 = [[0 for _ in range(c)] for _ in range(r)]
+
+for i in range(len(matrix1)):
+    for j in range(len(matrix2[0])):
+        for k in range(len(matrix2)):
+            matrix4[i][j] += matrix1[i][k] * matrix2[k][j]
+
+
+print(matrix4) 
+
+
+
+
+
+------------------------------------------------------------------
+
+
